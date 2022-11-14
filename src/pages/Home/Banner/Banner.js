@@ -2,7 +2,6 @@ import React from 'react';
 import banner1 from '../../../images/banner.jpg'
 import banner2 from '../../../images/banner1.jpg'
 import banner3 from '../../../images/banner2.jpg'
-import banner4 from '../../../images/banner3.jpg'
 import './banner.css'
 
 const Banner = () => {
@@ -14,7 +13,7 @@ const Banner = () => {
                 </div>
                 <div className="absolute transform translate-y-52 translate-x-3/4 top-1/2 text-center text-white">
                     <h1 className='text-4xl'>Your safety is our main goal</h1>
-                    <p className='text-xl'>We facilitate hundreds of thousands of transactions every day through our secure platform.</p>
+                    <p className='text-xl'>We facilitate hundreds of thousands of transactions <br /> every day through our secure platform.</p>
 
                 </div>
                 <div className="absolute flex justify-between transform translate-y-full left-5 right-5 top-1/3">
