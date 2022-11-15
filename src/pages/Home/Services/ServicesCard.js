@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 
 const ServicesCard = ( { service } ) => {
@@ -8,7 +10,12 @@ const ServicesCard = ( { service } ) => {
     const { _id, img, price, name, details, rating } = service;
     return (
         <div className="card card-compact w-96 bg-base-100 shadow-2xl">
-            <figure><img className='h-52' src={ img } alt="Shoes" /></figure>
+            <PhotoProvider>
+                <PhotoView src={ img }>
+                    <figure><img className='h-52' src={ img } alt="Shoes" /></figure>
+                </PhotoView>
+            </PhotoProvider>
+
             <div className="card-body">
                 <h2 className="card-title">
                     { name }
