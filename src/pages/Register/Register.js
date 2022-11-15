@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const Register = () => {
+    const [ error, setError ] = useState( '' )
+    const { createUser } = useContext( AuthContext )
+
 
     const handleRegister = event => {
         event.preventDefault();
@@ -12,8 +17,18 @@ const Register = () => {
         const password = form.password.value;
 
         const user = { name, email, password, photoUrl }
-        console.log( user )
 
+        createUser( email, password )
+            .then( result => {
+                const user = result.user;
+                console.log( user );
+                form.reset();
+                setError( '' )
+            } )
+            .catch( error => {
+                console.error( error )
+                setError( error.message );
+            } )
     }
 
 
@@ -33,6 +48,7 @@ const Register = () => {
                             <span className="label-text">Email</span>
                         </label>
                         <input type="email" name='email' placeholder="Enter your email" className="input input-bordered" required />
+                        <p className='text-red-600 font-semibold'>{ error.slice( 22, 42 ) }</p>
                     </div>
                     <div className="form-control">
                         <label className="label">
