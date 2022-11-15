@@ -3,6 +3,7 @@ import Main from '../layout/Main';
 import Blog from '../pages/Blog/Blog';
 import Home from '../pages/Home/Home';
 import ServiceDetails from '../pages/Home/Services/ServiceDetails/ServiceDetails';
+import ServicesCard from '../pages/Home/Services/ServicesCard';
 import Login from '../pages/Login/Login';
 
 const router = createBrowserRouter( [

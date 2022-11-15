@@ -4,7 +4,7 @@ import ServicesCard from './ServicesCard';
 const Services = () => {
     const [ services, setServices ] = useState( [] )
     const [ visible, setVisible ] = useState( 3 )
-    // const [ disabled, setDisabled ] = useState( false )
+    const [ btn, setBtn ] = useState( false )
 
     useEffect( () => {
         fetch( 'http://localhost:5000/services' )
@@ -15,6 +15,7 @@ const Services = () => {
     const showAll = () => {
         const visible = services.length;
         setVisible( visible )
+        setBtn( true )
     }
 
     return (
@@ -26,7 +27,7 @@ const Services = () => {
                 }
             </div>
             {/* show all services */ }
-            <button onClick={ showAll } className=" mt-10 btn btn-primary">Show All</button>
+            <button onClick={ showAll } className=" mt-10 btn btn-primary" disabled={ btn }>Show All</button>
         </div>
     );
 };
