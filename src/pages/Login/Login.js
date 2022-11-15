@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
+    const { providerLogin } = useContext( AuthContext )
+    const googleProvider = new GoogleAuthProvider();
+
+
 
     const handleLogin = event => {
         event.preventDefault();
@@ -11,7 +18,15 @@ const Login = () => {
 
         const user = { email, password }
         console.log( user )
+    }
 
+    const handleGoogleSignIn = () => {
+        providerLogin( googleProvider )
+            .then( result => {
+                const user = result.user;
+                console.log( user );
+            } )
+            .catch( error => console.error( 'error ', error ) )
     }
 
     return (
@@ -38,8 +53,10 @@ const Login = () => {
                         <input className="btn btn-primary" type="submit" value="Login" />
                     </div>
                 </form>
-
                 <p className='text-center'>New to Safe Travel <Link className='text-orange-600 font-bold' to='/signup'>Sign Up</Link></p>
+
+                <button onClick={ handleGoogleSignIn } className="btn btn-outline btn-info mx-9 mt-5"><FaGoogle /> <span className='ml-2'>Google</span></button>
+
             </div>
         </div>
     );
