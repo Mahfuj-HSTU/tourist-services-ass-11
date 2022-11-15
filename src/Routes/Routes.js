@@ -1,11 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Main from '../layout/Main';
+import AddServices from '../pages/AddServices/AddServices';
 import Blog from '../pages/Blog/Blog';
 import Home from '../pages/Home/Home';
 import ServiceDetails from '../pages/Home/Services/ServiceDetails/ServiceDetails';
 import ServicesCard from '../pages/Home/Services/ServicesCard';
 import Login from '../pages/Login/Login';
+import MyReview from '../pages/MyReview/MyReview';
 import Register from '../pages/Register/Register';
+import PrivateRoute from './Privateroute/Privateroute';
 
 const router = createBrowserRouter( [
     {
@@ -32,6 +35,14 @@ const router = createBrowserRouter( [
             {
                 path: '/signup',
                 element: <Register></Register>
+            },
+            {
+                path: '/myReview',
+                element: <PrivateRoute><MyReview></MyReview></PrivateRoute>
+            },
+            {
+                path: '/addServices',
+                element: <PrivateRoute><AddServices></AddServices></PrivateRoute>
             }
         ]
     }
