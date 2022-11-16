@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { toast } from 'react-hot-toast';
+
 
 const AddServices = () => {
     const [ services, setServices ] = useState( {} )
@@ -16,7 +18,7 @@ const AddServices = () => {
             .then( res => res.json() )
             .then( data => {
                 if ( data.acknowledged ) {
-                    alert( 'User added successfully' )
+                    toast.success( 'Services added successfully' )
                     event.target.reset();
                 }
                 // console.log( data )
@@ -39,7 +41,7 @@ const AddServices = () => {
                 <form onSubmit={ handleAddServices } className="card-body">
 
                     <div className="form-control">
-                        <input onChange={ handleInputBlur } type="text" name='name' placeholder="Enter place name" className="input input-bordered" />
+                        <input onChange={ handleInputBlur } type="text" name='name' placeholder="Enter place name" className="input input-bordered" required />
                     </div>
 
                     <div className="form-control">
@@ -47,7 +49,7 @@ const AddServices = () => {
                     </div>
 
                     <div className="form-control">
-                        <input onChange={ handleInputBlur } type="text" name='details' placeholder="Enter details" className="input input-bordered" />
+                        <input onChange={ handleInputBlur } type="text" name='details' placeholder="Enter details" className="input input-bordered" required />
                     </div>
 
                     <div className="form-control">
