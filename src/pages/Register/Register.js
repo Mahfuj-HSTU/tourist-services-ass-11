@@ -7,7 +7,7 @@ const Register = () => {
     const [ error, setError ] = useState( '' )
     const { createUser } = useContext( AuthContext )
 
-
+    // handle user create
     const handleRegister = event => {
         event.preventDefault();
         const form = event.target;
@@ -18,6 +18,7 @@ const Register = () => {
 
         // const user = { name, email, password, photoUrl }
 
+        // registered user create
         createUser( email, password )
             .then( result => {
                 const user = result.user;
@@ -60,7 +61,7 @@ const Register = () => {
                         <label className="label">
                             <span className="label-text">Password</span>
                         </label>
-                        <input type="text" name='password' placeholder="password" className="input input-bordered" required />
+                        <input type="password" name='password' placeholder="password" className="input input-bordered" required />
                         <label className="label">
                             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                         </label>
@@ -69,7 +70,7 @@ const Register = () => {
                         <input className="btn btn-primary" type="submit" value="Register" />
                     </div>
                 </form>
-
+                {/* if you are old user and you have an account */ }
                 <p className='text-center'>Already have an account? <Link className='text-orange-600 font-bold' to='/login'>Login</Link></p>
             </div>
         </div>

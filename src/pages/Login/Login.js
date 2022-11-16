@@ -1,25 +1,39 @@
 import React, { useContext } from 'react';
 import { FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
-    const { providerLogin } = useContext( AuthContext )
+    const { providerLogin, login } = useContext( AuthContext )
     const googleProvider = new GoogleAuthProvider();
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const from = location.state?.from?.pathname || '/';
 
 
-
+    // handle created user login
     const handleLogin = event => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
 
-        const user = { email, password }
-        console.log( user )
+        // const user = { email, password }
+        // console.log( user )
+
+        login( email, password )
+            .then( result => {
+                const user = result.user
+                console.log( user );
+                form.reset();
+                navigate( from, { replace: true } )
+            } )
+            .catch( error => console.log( 'error ', error ) )
     }
 
+    // handle google login
     const handleGoogleSignIn = () => {
         providerLogin( googleProvider )
             .then( result => {
@@ -54,7 +68,7 @@ const Login = () => {
                     </div>
                 </form>
                 <p className='text-center'>New to Safe Travel <Link className='text-orange-600 font-bold' to='/signup'>Sign Up</Link></p>
-
+                {/* login btn of google login */ }
                 <button onClick={ handleGoogleSignIn } className="btn btn-outline btn-info mx-9 mt-5"><FaGoogle /> <span className='ml-2'>Google</span></button>
 
             </div>
