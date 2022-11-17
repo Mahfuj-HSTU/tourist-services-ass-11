@@ -2,7 +2,6 @@ import React from 'react';
 
 const ReviewCard = ( { review } ) => {
     const { Name, message, userPhoto } = review;
-    console.log( userPhoto );
     return (
         <div className="card card-compact w-96 bg-base-100 shadow-2xl">
             <div className="card-body">

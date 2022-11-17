@@ -2,10 +2,12 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 import { toast } from 'react-hot-toast';
+import useTitle from '../../Hooks/useTitle';
 
 const Register = () => {
     const [ error, setError ] = useState( '' )
     const { createUser } = useContext( AuthContext )
+    useTitle( 'Registration' )
 
     // handle user create
     const handleRegister = event => {
@@ -24,6 +26,7 @@ const Register = () => {
                 const user = result.user;
                 console.log( user );
                 form.reset();
+                toast.success( 'Registration successful.' )
                 setError( '' )
             } )
             .catch( error => {

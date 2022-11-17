@@ -3,6 +3,7 @@ import toast from 'react-hot-toast';
 import { FaUser } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
+import useTitle from '../../Hooks/useTitle';
 import ReviewCard from './ReviewCard';
 
 const Review = ( { service } ) => {
@@ -10,11 +11,13 @@ const Review = ( { service } ) => {
     const [ reviews, setReview ] = useState( [] )
     const { user } = useContext( AuthContext )
     const navigate = useNavigate();
+    useTitle( Review )
     const { _id, name } = service;
     // console.log( user )
 
     const handleReview = event => {
         if ( !user ) {
+            toast.error( 'To give review please login first.' )
             return navigate( "/login" );
         }
         event.preventDefault();
@@ -33,7 +36,7 @@ const Review = ( { service } ) => {
         }
         // console.log( review )
 
-        const url = ( 'http://localhost:5000/reviews' )
+        const url = ( 'https://tourist-services-server.vercel.app/reviews' )
         fetch( url, {
             method: "POST",
             headers: {
@@ -52,7 +55,7 @@ const Review = ( { service } ) => {
     }
 
     useEffect( () => {
-        fetch( `http://localhost:5000/getreviews/${ _id }` )
+        fetch( `https://tourist-services-server.vercel.app/getreviews/${ _id }` )
             .then( res => res.json() )
             .then( result => {
                 // console.log( result );

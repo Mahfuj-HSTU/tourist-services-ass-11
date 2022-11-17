@@ -4,13 +4,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
 import toast from 'react-hot-toast';
+import useTitle from '../../Hooks/useTitle';
 
 const Login = () => {
-
     const { providerLogin, login } = useContext( AuthContext )
     const googleProvider = new GoogleAuthProvider();
     const location = useLocation();
     const navigate = useNavigate();
+    useTitle( 'login' );
 
     const from = location.state?.from?.pathname || '/';
 

@@ -1,27 +1,30 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { FaUser } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
-import { useLoaderData } from 'react-router-dom';
+import useTitle from '../../Hooks/useTitle';
+import MyReviewCard from './MyReviewCard';
 
 
 const MyReview = () => {
-    const [ services, setServices ] = useState( [] )
+    const { user } = useContext( AuthContext )
+    const [ reviews, setReviews ] = useState( [] )
+    useTitle( 'MyReviews' )
 
     useEffect( () => {
-        fetch( 'http://localhost:5000/reviews' )
+        fetch( `https://tourist-services-server.vercel.app/reviews?email=${ user.email }` )
             .then( res => res.json() )
-            .then( data => setServices( data ) )
-    }, [] )
+            .then( data => setReviews( data ) )
+    }, [ user?.email ] )
 
 
     return (
         <div className=' mt-5 mb-10 text-center'>
-            <h2 className=' text-center text-5xl my-10 text-blue-700 font-semibold'>Services: { services.length }</h2>
-            {/* <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
+            <h2 className=' text-center text-5xl my-10 text-blue-700 font-semibold'>You give: { reviews.length } reviews</h2>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-5'>
                 {
-                    services.map( service => <ServicesCard key={ service._id } service={ service }></ServicesCard> )
+                    reviews.map( reviews => <MyReviewCard key={ reviews._id } reviews={ reviews }></MyReviewCard> )
                 }
-            </div> */}
+            </div>
+
         </div>
     );
 };
