@@ -3,8 +3,10 @@ import { FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
+import toast from 'react-hot-toast';
 
 const Login = () => {
+
     const { providerLogin, login } = useContext( AuthContext )
     const googleProvider = new GoogleAuthProvider();
     const location = useLocation();
@@ -30,7 +32,11 @@ const Login = () => {
                 form.reset();
                 navigate( from, { replace: true } )
             } )
-            .catch( error => console.log( 'error ', error ) )
+            .catch( error => {
+                console.error( 'error ', error )
+                toast.error( 'Register first to login' )
+                form.reset();
+            } )
     }
 
     // handle google login
@@ -39,6 +45,7 @@ const Login = () => {
             .then( result => {
                 const user = result.user;
                 console.log( user );
+                navigate( from, { replace: true } )
             } )
             .catch( error => console.error( 'error ', error ) )
     }

@@ -5,7 +5,7 @@ import logo from '../../../images/logo.png'
 
 const Header = () => {
     const { user, logOut } = useContext( AuthContext )
-    console.log( user );
+    // console.log( user );
 
 
     const handleLogOut = () => {
@@ -18,6 +18,7 @@ const Header = () => {
     const menuItems = <>
         <li className='font-semibold'><Link to='/'>Home</Link> </li>
         <li className='font-semibold'><Link to='/blog'>Blog</Link> </li>
+        <li className='font-semibold'><Link to='/services'>Services</Link> </li>
         {
             user?.email ?
                 <>
