@@ -1,7 +1,7 @@
 import React from 'react';
 
-const MyReviewCard = ( { reviews, handleDelete } ) => {
-    const { Name, message, userPhoto, serviceName, _id } = reviews;
+const MyReviewCard = ( { reviews, handleDelete, handleUpdate } ) => {
+    const { message, serviceName, _id } = reviews;
     // console.log( userPhoto );
     return (
         <div className="card card-compact w-96 bg-base-100 shadow-2xl p-2">
@@ -15,10 +15,13 @@ const MyReviewCard = ( { reviews, handleDelete } ) => {
                     </button>
                 </div>
                 <p className='text-start text-lg'>{ message }</p>
-                <button className="btn btn-active btn-ghost">Update</button>
+                <label htmlFor="my-modal" onClick={ () => handleUpdate( _id ) } className="btn btn-active btn-ghost">
+                    Update
+                </label>
+
 
             </div>
-        </div>
+        </div >
     );
 };
 
