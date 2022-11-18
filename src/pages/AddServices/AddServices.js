@@ -9,7 +9,7 @@ const AddServices = () => {
 
     const handleAddServices = event => {
         event.preventDefault();
-        const url = ( 'https://tourist-services-server.vercel.app/services' )
+        const url = ( 'http://localhost:5000/services' )
         fetch( url, {
             method: "POST",
             headers: {
