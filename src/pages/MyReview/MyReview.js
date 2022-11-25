@@ -13,13 +13,13 @@ const MyReview = () => {
     useTitle( 'MyReviews' )
 
     useEffect( () => {
-        fetch( `http://localhost:5000/reviews?email=${ user.email }` )
+        fetch( `https://tourist-services-server.vercel.app/reviews?email=${ user.email }` )
             .then( res => res.json() )
             .then( data => setReviews( data ) )
     }, [ user?.email ] )
 
     const handleUpdate = id => {
-        fetch( `http://localhost:5000/reviews/${ id }`, {
+        fetch( `https://tourist-services-server.vercel.app/reviews/${ id }`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -30,6 +30,7 @@ const MyReview = () => {
             .then( data => {
                 console.log( data );
                 if ( data.modifiedCount > 0 ) {
+                    toast.success( 'Updated successful' )
                     const remaining = reviews.filter( rev => rev._id !== id )
                     const approving = reviews.find( rev => rev._id === id );
                     approving.status = 'Approved'
@@ -42,7 +43,7 @@ const MyReview = () => {
     const handleDelete = id => {
         const proceed = window.confirm( 'Are your sure, you want to cancel this order?' )
         if ( proceed ) {
-            fetch( `http://localhost:5000/reviews/${ id }`, {
+            fetch( `https://tourist-services-server.vercel.app/reviews/${ id }`, {
                 method: 'DELETE'
             } )
                 .then( res => res.json() )
