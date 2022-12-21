@@ -7,7 +7,7 @@ const ServiceDetails = () => {
     // console.log( service )
     const { img, price, name, details } = service;
     return (
-        <div>
+        <div className='mt-24'>
             {/* service details */ }
             <div className="card card-compact w-full bg-base-100 shadow-2xl px-5 py-9">
                 <figure><img className='h-52' src={ img } alt="Shoes" /></figure>

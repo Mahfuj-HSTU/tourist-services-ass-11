@@ -1,7 +1,14 @@
-/* .carousel-img img {
-	height: 75%;
+.custom {
+	height: 500px;
+}
+.carousel-img {
 	width: 100%;
-} */
+	/* height: 65%; */
+}
+.carousel-img img {
+	height: 100%;
+	width: 100%;
+}
 
 .carousel-img:after {
 	content: '';

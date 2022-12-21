@@ -60,7 +60,7 @@ const MyReview = () => {
 
 
     return (
-        <div className=' mt-5 mb-10 text-center'>
+        <div className='mt-24 mb-10 text-center'>
             <h2 className=' text-center text-5xl my-10 text-blue-700 font-semibold'>You give: { reviews.length } reviews</h2>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-5'>
                 {

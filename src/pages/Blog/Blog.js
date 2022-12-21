@@ -4,7 +4,7 @@ import useTitle from '../../Hooks/useTitle';
 const Blog = () => {
     useTitle( 'Blog' )
     return (
-        <div className='mx-auto'>
+        <div className='mx-auto mt-24'>
             <h2 className='md:text-5xl sm:text-3xl text-2xl text-blue-900 my-12 '>There are some important notes, which is beneficial for you.</h2>
             <div className="my-4 p-4 bg-cyan-300 text-left rounded-lg">
                 <h3 className='text-2xl mb-2'>Difference between SQL and NoSQL</h3>
