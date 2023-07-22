@@ -1,3 +1,19 @@
+# Project name
+Safe Travel
+
+# live site
+https://tourist-service-36eff.web.app
+
+# Wroking process
+1. create a react app
+2. setup react router, tailwind as a css library, react icon for icon
+3. create router
+4. create components and set it in the router
+5. feth the data using loder and feth using api from tha database
+6. use mongodb as databas
+7. use firebase authenticatin for user login and registration
+8. use react hot toast for tostify
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
