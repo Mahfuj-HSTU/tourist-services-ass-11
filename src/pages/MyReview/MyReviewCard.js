@@ -4,7 +4,7 @@ const MyReviewCard = ({ reviews, handleDelete, handleUpdate }) => {
 	const { message, serviceName, _id } = reviews;
 	// console.log( userPhoto );
 	return (
-		<div className='card card-compact w-96 bg-base-100 shadow-2xl p-2'>
+		<div className='card card-compact w-96 bg-base-200 shadow-xl p-2'>
 			<div className='card-body'>
 				<div className='flex justify-between'>
 					<h2 className='card-title text-3xl'>{serviceName}</h2>
