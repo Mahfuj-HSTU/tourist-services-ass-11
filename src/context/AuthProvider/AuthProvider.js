@@ -1,55 +1,80 @@
-import React, { createContext, useEffect, useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
-import app from '../../firebase/tourist.firebase';
+import React, { createContext, useEffect, useState } from "react";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  signInWithPopup,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+} from "firebase/auth";
+import app from "../../firebase/tourist.firebase";
 
 export const AuthContext = createContext();
-const auth = getAuth( app )
+const auth = getAuth(app);
 
-const AuthProvider = ( { children } ) => {
-    const [ user, setUser ] = useState( null )
-    const [ loading, setLoading ] = useState( true )
+const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    // google login
-    const providerLogin = ( provider ) => {
-        setLoading( true )
-        return signInWithPopup( auth, provider )
-    }
-    // register by create user
-    const createUser = ( email, password ) => {
-        setLoading( true )
-        return createUserWithEmailAndPassword( auth, email, password )
-    }
-    // login after register
-    const login = ( email, password ) => {
-        setLoading( true )
-        return signInWithEmailAndPassword( auth, email, password )
-    }
-    const logOut = () => {
-        setLoading( true )
-        return signOut( auth );
-    }
+  // google login
+  const providerLogin = (provider) => {
+    setLoading(true);
+    return signInWithPopup(auth, provider);
+  };
+  // register by create user
+  const createUser = (email, password) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+  // varify email
+  const verifyEmail = () => {
+    return sendEmailVerification(auth.currentUser);
+  };
+  // login after register
+  const login = (email, password) => {
+    setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
-    useEffect( () => {
-        const unsubscribe = onAuthStateChanged( auth, currentUser => {
-            // console.log( currentUser );
-            setUser( currentUser );
-            setLoading( false )
-        } );
+  // reset password
+  const resetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
 
-        return () => {
-            return unsubscribe();
-        }
-    }, [] )
+  // logout
+  const logOut = () => {
+    setLoading(true);
+    return signOut(auth);
+  };
 
-    const authInfo = {
-        user, loading, providerLogin, createUser, login, logOut
-    }
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      // console.log( currentUser );
+      setUser(currentUser);
+      setLoading(false);
+    });
 
-    return (
-        <AuthContext.Provider value={ authInfo }>
-            { children }
-        </AuthContext.Provider>
-    );
+    return () => {
+      return unsubscribe();
+    };
+  }, []);
+
+  const authInfo = {
+    user,
+    loading,
+    providerLogin,
+    createUser,
+    verifyEmail,
+    login,
+    logOut,
+    resetPassword,
+  };
+
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;
